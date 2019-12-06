@@ -14,6 +14,7 @@ from UnionNode import UnionNode
 from UnionPrim import UnionPrim
 from PrimPrune import PrimPrune
 from to_solve import to_solve
+from to_solve_k import to_solve_k
 
 from student_utils import *
 """
@@ -86,7 +87,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     G = nx.MultiGraph()
     G.add_nodes_from(list(num_to_name.keys()))
     G.add_weighted_edges_from(edgeList)
-    dfs_order, droploc = to_solve(G, locs)
+    dfs_order, droploc = to_solve_k(G, locs)
     # print("__________ DONE WITH ALG__________")
 
     drive_path = []

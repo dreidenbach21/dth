@@ -12,33 +12,12 @@ from Dfs import Dfs
 from Prune import Prune
 from DropLoc import DropLoc
 from DTH import DTH
+from kruskals import Kruskals
 
-def PrimPrune(un, G,locs):
-    soln = UnionPrim(un, G, locs)
+def KrusPrune(un, G,locs):
+    mst = Kruskals(un, G, locs)
     # print(soln, " the output of UnionPrim")
-    vertices = soln[0]
-    edges = soln[1]
 
-    klocs = list(locs.keys())
-    source = klocs[0]
-    # print(source, " this is the source vertex")
-
-    mst=nx.MultiGraph()
-    for v in vertices:
-        bool = v in locs
-        print(bool)
-        mst.add_node(v, dfs=0, home=bool)
-
-    # labels = {}
-    for e in edges:
-        ed = G.get_edge_data(e[0], e[1])
-        weight = ed[0]['weight']
-        # print(weight)
-        mst.add_edge(e[0], e[1], weight = weight)
-        # labels[(e[0], e[1])] = weight
-
-
-    print(mst.nodes(data=True))
 
     Prune(mst,G,locs,source)
     # now all useless paths in our MST have been cut
