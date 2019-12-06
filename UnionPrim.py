@@ -81,7 +81,7 @@ def UnionPrim(un, G,locs):
                     # print("____________IN____________")
                     a = .0000001
                 if(weight-a < min):
-                    print("UPDATE ", vert)
+                    # print("UPDATE ", vert)
                     min = weight
                     min_vert = vert
                     min_edge = edge
@@ -115,7 +115,7 @@ def UnionPrim(un, G,locs):
             nvdic[min_vert] = min_vert;
             nedic = node.get_edges()
             ned = (min_edge[0], min_edge[1])
-            print(ned)
+            # print(ned)
             nedic[ned] = ned;
 
 
