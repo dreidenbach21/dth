@@ -13,5 +13,5 @@ from UnionNode import UnionNode
 def Kruskals(un, G,locs):
     # 1)Create a set mstSet that keeps track of vertices already included in MST.
     # locs is a hashmap that maps the source/home to its unionfind element index
-    T = minimum_spanning_tree(G, weight='weight', algorithm='kruskal'
+    T = minimum_spanning_tree(G, weight='weight', algorithm='kruskal')
     return T
