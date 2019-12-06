@@ -117,18 +117,18 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     homes = set(locs.keys())
     homes.remove(0)
 
-    while (len(list(homes & set(leafloc.keys())))== len(list(homes))):
-        for loc in locs:
-            if loc !=0 and loc not in leafloc:
-                vert = 0
-                min_dist = sys.maxsize
-                for drop in dfs_order:
-                    dis = nx.bellman_ford_path_length(G,drop,leaf)
-                    if( dis < min_dist):
-                        min_dist = dis
-                        vert = drop
-                leafloc[loc] = vert
-                droploc[vert].append(loc)
+    # while (len(list(homes & set(leafloc.keys())))== len(list(homes))):
+    for loc in locs:
+        if loc !=0 and loc not in leafloc:
+            vert = 0
+            min_dist = sys.maxsize
+            for drop in dfs_order:
+                dis = nx.bellman_ford_path_length(G,drop,leaf)
+                if( dis < min_dist):
+                    min_dist = dis
+                    vert = drop
+            leafloc[loc] = vert
+            droploc[vert].append(loc)
 
 
     drop_locations = {}
