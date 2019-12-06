@@ -71,7 +71,7 @@ def KrusPrune(un, G,locs):
     # plt.show()
 
 
-    return dfs_order, droploc
+    return dfs_order, droploc, leafloc
 
      # create the MST as a MultiGraph
      # DFS and prune paths that do not hit any homes

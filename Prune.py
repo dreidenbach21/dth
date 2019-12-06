@@ -23,7 +23,7 @@ def Prune(mst,G,locs,source):
 
 def traverse(mst,source,locs, parent):
     neighbors = list(mst.neighbors(source))
-    print(neighbors)
+    # print(neighbors)
     if(parent != None):
         neighbors.remove(parent)
     for n in neighbors:

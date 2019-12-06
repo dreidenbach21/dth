@@ -94,7 +94,7 @@ def find_cost(mst,G,leafloc,droploc, cost,dfs_order):
     i = 0
     # print(dfs_order, " the dfs order")
     while i < len(dfs_order)-1:
-        print(dfs_order[i],dfs_order[i+1])
+        # print(dfs_order[i],dfs_order[i+1])
         dist = nx.bellman_ford_path_length(G,dfs_order[i],dfs_order[i+1])
         cost += driver_cost*dist
         i+=1

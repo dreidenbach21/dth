@@ -63,7 +63,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
     edgeList = []
     # print(list_of_locations, " list of locations ")
-    print(adjacency_matrix)
+    # print(adjacency_matrix)
     for i in range(len(list_of_locations)):
         for j in range(len(list_of_locations)):
             matWeight = adjacency_matrix[i][j]
@@ -87,8 +87,25 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     G = nx.MultiGraph()
     G.add_nodes_from(list(num_to_name.keys()))
     G.add_weighted_edges_from(edgeList)
-    dfs_order, droploc = to_solve_k(G, locs)
+    dfs_order, droploc, leafloc = to_solve_k(G, locs)
     # print("__________ DONE WITH ALG__________")
+    if(dfs_order[-1] != dfs_order[0]):
+        dfs_order.append(dfs_order[0])
+    for leaf in leafloc:
+        dr = leafloc[leaf]
+        if dr not in dfs_order:
+            min_dist = sys.maxsize
+            vert = 0
+            for drop in dfs_order:
+                dis = nx.bellman_ford_path_length(G,drop,leaf)
+                if( dis < min_dist):
+                    vert = drop
+                    min_dist = dis
+            leafloc[leaf] = vert
+            if vert not in droploc:
+                droploc[vert]= [leaf]
+            else:
+                droploc[vert].append(leaf)
 
     drive_path = []
     for v in dfs_order:
@@ -96,7 +113,24 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         p = orig_name_to_num[char] # taking the char and returning the true adj matrix index
         drive_path.append(p)
     # print("__________test__________")
-    print(drive_path)
+    # print(drive_path)
+    homes = set(locs.keys())
+    homes.remove(0)
+
+    while (len(list(homes & set(leafloc.keys())))== len(list(homes))):
+        for loc in locs:
+            if loc !=0 and loc not in leafloc:
+                vert = 0
+                min_dist = sys.maxsize
+                for drop in dfs_order:
+                    dis = nx.bellman_ford_path_length(G,drop,leaf)
+                    if( dis < min_dist):
+                        min_dist = dis
+                        vert = drop
+                leafloc[loc] = vert
+                droploc[vert].append(loc)
+
+
     drop_locations = {}
     for drop in droploc:
         locations = []
@@ -109,8 +143,9 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
             locations.append(pp)
         drop_locations[p] = locations
 
-    print(drop_locations)
+    # print(drop_locations)
     # print("__________SOLVED__________")
+
 
     return drive_path, drop_locations
 

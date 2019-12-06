@@ -26,7 +26,7 @@ def PrimPrune(un, G,locs):
     mst=nx.MultiGraph()
     for v in vertices:
         bool = v in locs
-        print(bool)
+        # print(bool)
         mst.add_node(v, dfs=0, home=bool)
 
     # labels = {}
@@ -38,7 +38,7 @@ def PrimPrune(un, G,locs):
         # labels[(e[0], e[1])] = weight
 
 
-    print(mst.nodes(data=True))
+    # print(mst.nodes(data=True))
 
     Prune(mst,G,locs,source)
     # now all useless paths in our MST have been cut
