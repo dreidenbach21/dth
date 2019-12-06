@@ -19,7 +19,7 @@ def KrusPrune(un, G,locs):
     # print(soln, " the output of UnionPrim")
 
 
-    Prune(mst,G,locs,source)
+    Prune(mst,G,locs,0)
     # now all useless paths in our MST have been cut
     droploc = {}
     leafloc = {}
