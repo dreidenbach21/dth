@@ -23,9 +23,9 @@ def KrusPrune(un, G,locs):
     # now all useless paths in our MST have been cut
     droploc = {}
     leafloc = {}
-    DropLoc(mst,G,source,locs,droploc,leafloc)
+    DropLoc(mst,G,0,locs,droploc,leafloc)
     dfs_order = []
-    Dfs(mst,G,locs,dfs_order,source)
+    Dfs(mst,G,locs,dfs_order,0)
     # print("_______STARTING TO DTH_______")
     # print(droploc, "_____droploc0____")
     dfs_order, droploc, leafloc = DTH(G,mst,dfs_order,droploc,leafloc,locs)
